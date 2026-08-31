@@ -12,6 +12,6 @@
   "dependencies": {
     "@opensearch-project/opensearch": "^1.0.0",
     "@types/aws-lambda": "^8.10.86",
-    "aws-sdk": "^2.1044.0"
+    "aws-sdk": "^2.1693.0"
   }
 }
