@@ -1,0 +1,10 @@
+!jest.config.js
+node_modules
+.env
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+
+# Generated AWS internals
+cdk.context.json

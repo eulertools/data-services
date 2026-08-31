@@ -1,0 +1,17 @@
+{
+  "name": "elasticsearch-syncer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@opensearch-project/opensearch": "^1.0.0",
+    "@types/aws-lambda": "^8.10.86",
+    "aws-sdk": "^2.1044.0"
+  }
+}

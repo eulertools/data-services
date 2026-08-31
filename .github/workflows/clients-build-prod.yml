@@ -1,0 +1,35 @@
+name: Build Docker Image Prod
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'clients/**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.EULER_PROD_AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.EULER_PROD_AWS_SECRET_ACCESS_KEY }}
+      AWS_ACCOUNT_ID: ${{ secrets.EULER_PROD_AWS_ACCOUNT_ID }}
+      AWS_REGION: us-east-1
+    steps:
+      - uses: actions/checkout@v2
+        id: clone
+      - id: docker-push-collector-clients
+        uses: kciter/aws-ecr-action@v3
+        with:
+          access_key_id: ${{ env.AWS_ACCESS_KEY_ID }}
+          secret_access_key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          account_id: ${{ env.AWS_ACCOUNT_ID }}
+          repo: data-collectors
+          region: ${{ env.AWS_REGION }}
+          tags: latest
+          path: ./clients
+          dockerfile: ./clients/Dockerfile
+      - uses: act10ns/slack@v1
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: always()
